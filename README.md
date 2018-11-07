@@ -5,7 +5,7 @@ This project aimed at removal of stains from documents by providing dirty and cl
 
 We have been given a series of training images, both dirty (with stains and creased paper) and clean (with a white background and black letters). We are asked to develop an algorithm that converts, as close as possible, the dirty images into clean images.
 
-![alt-text]https://colinpriestdotcom.files.wordpress.com/2015/07/the-problem-to-be-solved.jpg
+![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/07/the-problem-to-be-solved.jpg)
 
 A greyscale image can be thought of as a three-dimensional surface. The x and y axes are the location within the image, and the z axis is the brightness of the image at that location. The great the brightness, the whiter the image at that location.
 
@@ -66,34 +66,36 @@ Look at the relationship between x and y.
 Except at the extremes, there is a linear relationship between the brightness of the dirty images and the cleaned images. There is some noise around this linear relationship, and a clump of pixels that are halfway between white and black. There is a broad spread of x values as y approaches 1, and these pixels probably represent stains that need to be removed.
 
 So the obvious first model would be a linear transformation, with truncation to ensure that the predicted brightnesses remain within the [0, 1] range.
-
-1 # fit a linear model, ignoring the data points at the extremes
-2 lm.mod.1 = lm(y ~ x, data=dat[dat$y &gt; 0.05 & dat$y &lt; 0.95,])
-3 summary(lm.mod.1)
-4 dat$predicted = sapply(predict(lm.mod.1, newdata=dat), function(x) max(min(x, 1),0))
-5 plot(dat$predicted[rows], dat$y[rows])
-6 rmse1 = sqrt(mean( (dat$y - dat$x) ^ 2))
-7 rmse2 = sqrt(mean( (dat$predicted - dat$y) ^ 2))
-8 c(rmse1, rmse2)
+ 
+fit a linear model, ignoring the data points at the extremes
+ lm.mod.1 = lm(y ~ x, data=dat[dat$y &gt; 0.05 & dat$y &lt; 0.95,])
+ summary(lm.mod.1)
+ dat$predicted = sapply(predict(lm.mod.1, newdata=dat), function(x) max(min(x, 1),0))
+ plot(dat$predicted[rows], dat$y[rows])
+ rmse1 = sqrt(mean( (dat$y - dat$x) ^ 2))
+ rmse2 = sqrt(mean( (dat$predicted - dat$y) ^ 2))
+ c(rmse1, rmse2)
 
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-output-5.png)
 
 The linear model has done a brightness and contrast correction. This reduces the RMSE score from 0.157 to 0.078. Let’s see an output image:
 
-1 # show the predicted result for a sample image
-2 img = readPNG("C:\\Users\\Colin\\Dropbox\\Kaggle\\Denoising Dirty Documents\\data\\train\\6.png")
-3 x = data.table(matrix(img, nrow(img) * ncol(img), 1))
-4 setnames(x, "x")
-5 yHat = sapply(predict(lm.mod.1, newdata=x), function(x) max(min(x, 1),0))
-6 imgOut = matrix(yHat, nrow(img), ncol(img))
-7 writePNG(imgOut, "C:\\Users\\Colin\\Dropbox\\Kaggle\\Denoising Dirty Documents\\data\\sample.png")
+show the predicted result for a sample image
+ img = readPNG("C:\\Users\\Colin\\Dropbox\\Kaggle\\Denoising Dirty Documents\\data\\train\\6.png")
+ x = data.table(matrix(img, nrow(img) * ncol(img), 1))
+ setnames(x, "x")
+ yHat = sapply(predict(lm.mod.1, newdata=x), function(x) max(min(x, 1),0))
+ imgOut = matrix(yHat, nrow(img), ncol(img))
+ writePNG(imgOut, "C:\\Users\\Colin\\Dropbox\\Kaggle\\Denoising Dirty Documents\\data\\sample.png")
 plot(raster(imgOut))
 
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-output-7.png)
 
 # Results 
 Although we have used a very simple model, we have been able to clean up this image:
+
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-before.png)
 
+Predicted computer
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-after.png)
 

@@ -96,6 +96,6 @@ Although we have used a very simple model, we have been able to clean up this im
 
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-before.png)
 
-Predicted computer
+##  Predicted computer
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-after.png)
 

@@ -1,4 +1,7 @@
 # Denoising Dirty Documents using R
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This project aimed at removal of stains from documents by providing dirty and clean images as data-sets for the model to learn and the model would clean the test images by observing results from the training dataset using Linear Regression.
 
 # The Structure of the Problem
@@ -98,4 +101,8 @@ Although we have used a very simple model, we have been able to clean up this im
 
 ##  Predicted computer
 ![alt-text](https://colinpriestdotcom.files.wordpress.com/2015/08/20150801-after.png)
+
+## License
+
+This project is licensed under the MIT License
 

@@ -62,6 +62,7 @@ Although we have used a very simple model, we have been able to clean up this im
 
 * https://www.kaggle.com/c/denoising-dirty-documents
 * https://colinpriest.com/2015/08/01/denoising-dirty-documents-part-1/
+* https://www.mathworks.com/matlabcentral/fileexchange/51812-kaggle-denoising-dirty-documents-with-matlab
 
 ## License
 

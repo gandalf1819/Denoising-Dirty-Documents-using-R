@@ -64,7 +64,10 @@ Although we have used a very simple model, we have been able to clean up this im
 * https://colinpriest.com/2015/08/01/denoising-dirty-documents-part-1/
 * https://www.mathworks.com/matlabcentral/fileexchange/51812-kaggle-denoising-dirty-documents-with-matlab
 
+## Support
+
+If you found this useful, please consider starring(★) the repo so that it can reach a broader audience
+
 ## License
 
-This project is licensed under the MIT License
-
+This project is licensed under the MIT License. Feel free to create a Pull Request for adding implementations or suggesting new ideas to make the analysis more insightful
